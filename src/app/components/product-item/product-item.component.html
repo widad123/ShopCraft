@@ -1,0 +1,9 @@
+<div class="border p-4 shadow-lg rounded-lg">
+  <img [src]="product.imageUrl" alt="{{ product.name }}" class="w-full h-48 object-cover">
+  <h2 class="text-xl font-bold">{{ product.name }}</h2>
+  <p>{{ product.description }}</p>
+  <p class="font-bold text-lg">{{ product.price }} €</p>
+  <button class="bg-blue-500 text-white px-4 py-2 rounded mt-2">Voir le produit</button>
+  <a [routerLink]="['/product', product.id]" class="text-blue-500 hover:underline">Voir détails</a>
+
+</div>
