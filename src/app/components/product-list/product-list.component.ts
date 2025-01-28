@@ -1,25 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { Product, ProductService } from '../../services/product.service';
-import { NgForOf, CommonModule } from '@angular/common';
+import { ProductItemComponent } from '../product-item/product-item.component';
+import { NgForOf } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
   templateUrl: './product-list.component.html',
   imports: [
-    CommonModule,
-    FormsModule,
+    ProductItemComponent,
     NgForOf,
-    RouterLink
+    RouterLink,
+    FormsModule
   ],
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
   filteredProducts: Product[] = [];
-  sortOption: string = '';
+  selectedCategory: string = '';
+  selectedSort: string = '';
 
   constructor(private productService: ProductService) {}
 
@@ -28,16 +30,16 @@ export class ProductListComponent implements OnInit {
     this.filteredProducts = [...this.products];
   }
 
-  filterProducts(category: string) {
-    this.filteredProducts = category
-      ? this.products.filter(p => p.category === category)
+  filterProducts() {
+    this.filteredProducts = this.selectedCategory
+      ? this.products.filter(p => p.category === this.selectedCategory)
       : [...this.products];
   }
 
-  sortProducts(option: string) {
-    if (option === 'price') {
+  sortProducts() {
+    if (this.selectedSort === 'price') {
       this.filteredProducts.sort((a, b) => a.price - b.price);
-    } else if (option === 'name') {
+    } else if (this.selectedSort === 'name') {
       this.filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
     }
   }
