@@ -1,7 +1,11 @@
-<div *ngIf="product" class="p-8">
+<div *ngIf="product; else loadingTemplate" class="p-8">
   <img [src]="product.imageUrl" alt="{{ product.name }}" class="w-full h-64 object-cover">
   <h1 class="text-3xl font-bold">{{ product.name }}</h1>
   <p>{{ product.description }}</p>
   <p class="text-2xl font-bold">{{ product.price }} €</p>
-  <button class="bg-green-500 text-white px-4 py-2 rounded">Ajouter au panier</button>
+  <button class="bg-green-500 text-white px-4 py-2 rounded" (click)="addToCart()">Ajouter au panier</button>
 </div>
+
+<ng-template #loadingTemplate>
+  <p class="text-center text-gray-500">Chargement du produit...</p>
+</ng-template>

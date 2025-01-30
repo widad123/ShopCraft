@@ -36,7 +36,14 @@ export class ProductService {
     return this.products;
   }
 
-  getProductById(id: number): Product | undefined {
-    return this.products.find(product => product.id === id);
+  getProductById(id: number): Product {
+    console.log("🔍 Recherche du produit ID :", id);
+    const product = this.products.find(product => product.id === id);
+    if (!product) {
+      throw new Error(`❌ Produit avec ID ${id} non trouvé !`);
+    }
+    return product;
   }
+
+
 }
