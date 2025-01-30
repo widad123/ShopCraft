@@ -31,7 +31,7 @@ export class ProductDetailsComponent implements OnInit {
     if (this.product && this.product.id !== undefined) {
       console.log("🛒 Produit ajouté :", this.product);
       this.cartService.addToCart({
-        id: this.product.id, // ✅ L'ID est maintenant assuré
+        id: this.product.id,
         name: this.product.name,
         price: this.product.price,
         quantity: 1

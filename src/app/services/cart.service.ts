@@ -1,35 +1,43 @@
-import {inject, Injectable} from '@angular/core';
-import {CartItem} from '../components/cart/CartItem';
-import { Database, ref, set, get, remove } from '@angular/fire/database';
+import { Injectable, inject, NgZone } from '@angular/core';
+import { Database, ref, set, get, remove, onValue } from '@angular/fire/database';
 import { BehaviorSubject } from 'rxjs';
+import { CartItem } from '../components/cart/CartItem';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  private db: Database = inject(Database);
+  private ngZone = inject(NgZone);
   private cart: CartItem[] = [];
   private cartSubject = new BehaviorSubject<CartItem[]>([]);
   cart$ = this.cartSubject.asObservable();
 
-  private db = inject(Database); // ✅ Injection correcte de Firebase Database
-
   constructor() {
-    console.log("🔍 Type de this.db :", this.db); // ✅ Vérifie le type de Firebase Database
-    this.loadCartFromFirebase();
+    console.log("🔍 Type de this.db :", this.db);
+    this.syncCartWithFirebase();
   }
 
-  /** Charger le panier depuis Firebase */
-  private async loadCartFromFirebase() {
-    const dbRef = ref(this.db, 'cart'); // ✅ Correction ref()
-    const snapshot = await get(dbRef);
-    if (snapshot.exists()) {
-      this.cart = snapshot.val();
-      this.cartSubject.next([...this.cart]);
-    }
+  private syncCartWithFirebase() {
+    const dbRef = ref(this.db, 'cart');
+    onValue(dbRef, (snapshot) => {
+      this.ngZone.run(() => {
+        if (snapshot.exists()) {
+          this.cart = snapshot.val() || [];
+          console.log("🛒 Mise à jour Firebase :", this.cart);
+          this.cartSubject.next([...this.cart]);
+        } else {
+          console.log("🛍️ Firebase renvoie un panier vide.");
+          this.cart = [];
+          this.cartSubject.next([]);
+        }
+      });
+    }, (error) => {
+      console.error("❌ Erreur de synchronisation Firebase :", error);
+    });
   }
 
-  /** Ajouter un produit au panier */
-  addToCart(product: { id: number, name: any; price: any; quantity: number }) {
+  addToCart(product: CartItem) {
     console.log("📦 Produit ajouté au panier :", product);
     const index = this.cart.findIndex(item => item.id === product.id);
     if (index !== -1) {
@@ -40,35 +48,29 @@ export class CartService {
     this.saveCartToFirebase();
   }
 
-  /** Supprimer un produit du panier */
   removeFromCart(productId: number) {
     this.cart = this.cart.filter(item => item.id !== productId);
     this.saveCartToFirebase();
   }
 
-  /** Vider complètement le panier */
   clearCart() {
     this.cart = [];
     this.saveCartToFirebase();
   }
 
-  /** Sauvegarder le panier dans Firebase */
   private saveCartToFirebase() {
-    console.log("💾 Sauvegarde du panier :", this.cart); // ✅ Vérifie le contenu du panier
+    console.log("💾 Sauvegarde du panier :", this.cart);
     set(ref(this.db, 'cart'), this.cart)
       .then(() => console.log("✅ Panier sauvegardé avec succès"))
       .catch(error => console.error("❌ Erreur de sauvegarde Firebase :", error));
 
-    this.cartSubject.next([...this.cart]); // ✅ Met à jour l'Observable après la sauvegarde
+    this.cartSubject.next([...this.cart]);
   }
 
-
-  /** Retourne le panier sous forme d'Observable */
   getCart() {
     return this.cart$;
   }
 
-  /** Calculer le prix total des articles dans le panier */
   getTotalPrice(): number {
     return this.cart.reduce((total, item) => total + item.price * item.quantity, 0);
   }
