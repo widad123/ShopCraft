@@ -5,7 +5,9 @@
       <div *ngFor="let item of cartItems" class="cart-item">
         <div class="item-info">
           <h3 class="item-name">{{ item.name }}</h3>
-          <p class="item-price">{{ item.price }} € x {{ item.quantity }} = {{ item.price * item.quantity }} €</p>
+          <p class="item-price">
+            {{ item.price }} € x {{ item.quantity }} = {{ item.price * item.quantity }} €
+          </p>
         </div>
         <div class="item-actions">
           <button mat-mini-fab color="primary" (click)="decrementQuantity(item.id)">

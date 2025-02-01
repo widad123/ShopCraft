@@ -1,0 +1,22 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.cart-trigger {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-menu-content {
+  padding: 10px;
+  min-width: 300px;
+}
+
+.cart-menu{
+  width: 350px;
+}
+
+.cart-button {
+  width: 100%;
+  margin-top: 15px;
+}
