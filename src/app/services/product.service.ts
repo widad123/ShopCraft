@@ -37,10 +37,9 @@ export class ProductService {
   }
 
   getProductById(id: number): Product {
-    console.log("🔍 Recherche du produit ID :", id);
     const product = this.products.find(product => product.id === id);
     if (!product) {
-      throw new Error(`❌ Produit avec ID ${id} non trouvé !`);
+      throw new Error(`Produit avec ID ${id} non trouvé !`);
     }
     return product;
   }

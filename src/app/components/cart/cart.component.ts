@@ -1,16 +1,18 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CartItem} from './CartItem';
 import {CartService} from '../../services/cart.service';
 import {CommonModule} from '@angular/common';
+import {MatIcon} from '@angular/material/icon';
+import {MatCard, MatCardContent, MatCardTitle} from '@angular/material/card';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatIcon, MatCardContent, MatCardTitle, MatCard],
   templateUrl: './cart.component.html',
-  styleUrl: './cart.component.css'
+  styleUrls: ['./cart.component.css']
 })
-export class CartComponent {
+export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
   totalPrice = 0;
 
@@ -19,17 +21,27 @@ export class CartComponent {
   ngOnInit(): void {
     this.cartService.getCart().subscribe(cart => {
       this.cartItems = cart;
-      console.log("🛒 Panier reçu dans CartComponent :", this.cartItems);
     });
     this.totalPrice = this.cartService.getTotalPrice();
   }
 
+  incrementQuantity(id: number) {
+    this.cartService.incrementQuantity(id);
+    this.totalPrice = this.cartService.getTotalPrice();
+  }
+
+  decrementQuantity(id: number) {
+    this.cartService.decrementQuantity(id);
+    this.totalPrice = this.cartService.getTotalPrice();
+  }
 
   removeFromCart(id: number) {
     this.cartService.removeFromCart(id);
+    this.totalPrice = this.cartService.getTotalPrice();
   }
 
   clearCart() {
     this.cartService.clearCart();
+    this.totalPrice = 0;
   }
 }

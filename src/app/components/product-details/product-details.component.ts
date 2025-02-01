@@ -21,7 +21,6 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log("🛍️ Produit chargé :", this.product);
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.product = this.productService.getProductById(id);
   }
@@ -29,7 +28,6 @@ export class ProductDetailsComponent implements OnInit {
 
   addToCart() {
     if (this.product && this.product.id !== undefined) {
-      console.log("🛒 Produit ajouté :", this.product);
       this.cartService.addToCart({
         id: this.product.id,
         name: this.product.name,
@@ -37,7 +35,7 @@ export class ProductDetailsComponent implements OnInit {
         quantity: 1
       });
     } else {
-      console.error("❌ Erreur : le produit est invalide ou n'a pas d'ID !");
+      console.error("Erreur : le produit est invalide ou n'a pas d'ID !");
     }
   }
 

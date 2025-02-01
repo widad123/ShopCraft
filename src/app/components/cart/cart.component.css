@@ -1,0 +1,40 @@
+.cart-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 16px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.item-info {
+  flex-grow: 1;
+}
+
+.item-name {
+  margin: 0;
+}
+
+.item-price {
+  margin: 4px 0 0;
+  color: #555;
+}
+
+.item-actions button {
+  margin-left: 8px;
+}
+
+.cart-total {
+  text-align: right;
+  margin-top: 16px;
+}
+
+.cart-actions {
+  text-align: right;
+  margin-top: 16px;
+}
