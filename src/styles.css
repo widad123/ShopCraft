@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body { height: 100%;  margin: 0;
+html, body { height: 100%;  margin: 0;  padding: 0;
 }
 app-root {
   display: flex;
@@ -12,4 +12,7 @@ app-root {
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .footer {
   margin-top: auto;
+}
+.main {
+  flex: 1;
 }
