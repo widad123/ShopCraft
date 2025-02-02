@@ -1,40 +1,105 @@
 .cart-container {
   max-width: 600px;
-  margin: 20px auto;
+  margin: 16px auto;
   padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .cart-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid #e0e0e0;
+  padding: 10px 3px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 
-.item-info {
+.cart-item-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-left: 5px !important;
+  border-radius: 10px;
+}
+
+.cart-item-info {
   flex-grow: 1;
 }
 
-.item-name {
-  margin: 0;
+.cart-item-name {
+  font-weight: bold;
 }
 
-.item-price {
-  margin: 4px 0 0;
-  color: #555;
+.cart-item-price {
+  font-size: 14px;
 }
 
-.item-actions button {
-  margin-left: 8px;
+.old-price {
+  text-decoration: line-through;
+  color: #999;
 }
 
-.cart-total {
-  text-align: right;
-  margin-top: 16px;
+.discount {
+  background: red;
+  color: white;
+  font-size: 12px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  margin-right: 5px;
 }
 
-.cart-actions {
-  text-align: right;
-  margin-top: 16px;
+.item-quantity {
+  width: 1.875rem;
+  height: 1.875rem;
+  text-align: center;
+  margin: 0 8px;
+  border: 1px solid #ddd;
+  border-radius: .3rem;
+  box-shadow: inherit;
+  padding: 2px 4px;
+  color: #2d2a29;
+  display: inline-flex;
+  font-size: .875rem;
+}
+
+.item-info{
+  display: flex;
+  flex-direction: row;
+}
+
+.item-separator {
+  margin: 0 5px;
+  width: 170px;
+}
+
+.item-quantity-button{
+  align-items: center;
+  background: none;
+  border-radius: .3125rem;
+  border: 1px solid #ddd;
+  color: #2d2a29;
+  cursor: pointer;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  font-size: .875rem;
+  height: 1.875rem;
+  justify-content: center;
+  width: 1.875rem;
+}
+
+.item-actions{
+  display: flex;
+  flex-direction: row;
+}
+
+.cart-title-total{
+  margin-bottom: 10px;
+}
+
+.cart-button {
+  width: 98.6%;
+  margin: 5px;
 }

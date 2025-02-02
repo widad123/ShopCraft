@@ -9,14 +9,21 @@
 
 .cart-menu-content {
   padding: 10px;
-  min-width: 300px;
-}
-
-.cart-menu{
-  width: 350px;
+  min-width: 500px !important;
+  max-width: 600px !important;
+  width: 600px !important;
+  margin: 5px;
+  overflow: hidden !important;
 }
 
 .cart-button {
-  width: 100%;
-  margin-top: 15px;
+  width: 98.6%;
+  margin: 0 5px;
+}
+
+::ng-deep .cart-menu{
+  min-width: 500px !important;
+  max-width: 600px !important;
+  width: 600px !important;
+  overflow: hidden !important;
 }

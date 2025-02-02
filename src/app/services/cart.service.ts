@@ -70,4 +70,17 @@ export class CartService {
   getTotalPrice(): number {
     return this.cart.reduce((total, item) => total + item.price * item.quantity, 0);
   }
+
+  updateQuantity(productId: number, quantity: number) {
+    const index = this.cart.findIndex(item => item.id === productId);
+    if (index !== -1 && quantity > 0) {
+      this.cart[index].quantity = quantity;
+      this.cartSubject.next([...this.cart]);
+    }
+  }
+
+  getTotalItemsCount(): number {
+    return this.cart.reduce((total, item) => total + item.quantity, 0);
+  }
+
 }

@@ -32,7 +32,8 @@ export class ProductDetailsComponent implements OnInit {
         id: this.product.id,
         name: this.product.name,
         price: this.product.price,
-        quantity: 1
+        quantity: 1,
+        imageUrl : this.product.imageUrl
       });
     } else {
       console.error("Erreur : le produit est invalide ou n'a pas d'ID !");
