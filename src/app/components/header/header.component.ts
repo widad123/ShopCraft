@@ -3,8 +3,8 @@ import {MatMenu, MatMenuTrigger} from '@angular/material/menu';
 import {MatToolbar} from '@angular/material/toolbar';
 import {MatIcon} from '@angular/material/icon';
 import {CartComponent} from '../cart/cart.component';
-import {MatButton, MatIconButton} from '@angular/material/button';
-import {Router, RouterLink} from '@angular/router';
+import {MatAnchor, MatButton, MatIconButton} from '@angular/material/button';
+import {Router, RouterLink, RouterLinkActive} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +16,9 @@ import {Router, RouterLink} from '@angular/router';
     MatMenuTrigger,
     MatIconButton,
     MatButton,
-    RouterLink
+    RouterLink,
+    MatAnchor,
+    RouterLinkActive
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'

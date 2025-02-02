@@ -27,3 +27,36 @@
   width: 600px !important;
   overflow: hidden !important;
 }
+.logo-link {
+  text-decoration: none;
+  color: #6e4f4f;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+mat-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /
+}
+
+.spacer {
+  flex: 1;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #6e4f4f;
+  font-weight: bold;
+}
+
+.active-link {
+  border-bottom: 2px solid #230e0e;
+}

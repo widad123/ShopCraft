@@ -1,14 +1,23 @@
 <mat-toolbar color="primary">
-  <a routerLink = "/products" class="logo-link">
-    <span>My E-Commerce</span>
-  </a>
+  <a routerLink="/" class="logo-link">My E-Commerce</a>
+
   <span class="spacer"></span>
+
+  <nav class="nav-links">
+    <a mat-button routerLink="/products" routerLinkActive="active-link">Produits</a>
+    <a mat-button routerLink="/cart" routerLinkActive="active-link">Panier</a>
+    <a mat-button routerLink="/profile" routerLinkActive="active-link">Profil</a>
+  </nav>
+
+  <span class="spacer"></span>
+
   <div class="cart-trigger">
     <button mat-icon-button [matMenuTriggerFor]="cartMenu">
       <mat-icon>shopping_cart</mat-icon>
     </button>
   </div>
 </mat-toolbar>
+
 
 <mat-menu #cartMenu="matMenu" class="cart-menu" xPosition="before">
   <div class="cart-menu-content">
