@@ -18,12 +18,12 @@ export class CartService {
     }
   }
 
-  addToCart(product: CartItem) {
+    addToCart(product: { id: number | undefined; name: string; price: number; quantity: number; imageUrl: string }) {
     const index = this.cart.findIndex(item => item.id === product.id);
     if (index !== -1) {
       this.cart[index].quantity += 1;
     } else {
-      this.cart.push({ ...product, quantity: 1 });
+      this.cart.push(<CartItem>{...product, quantity: 1});
     }
     this.cartSubject.next([...this.cart]);
     localStorage.setItem('cart', JSON.stringify(this.cart));

@@ -4,6 +4,8 @@ import { NgForOf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Product } from '../../Models/Products';
+import { CartService } from '../../services/cart.service';
+
 
 @Component({
   selector: 'app-product-list',
@@ -47,5 +49,15 @@ export class ProductListComponent implements OnInit {
     } else if (this.selectedSort === 'name') {
       this.filteredProducts.sort((a, b) => a.title.localeCompare(b.title));
     }
+  }
+  addToCart(product: Product) {
+    this.cartService.addToCart({
+      id: product.id,
+      name: product.title,
+      price: product.price,
+      quantity: 1,
+      imageUrl: product.image
+    });
+    alert('Produit ajouté au panier !');
   }
 }
