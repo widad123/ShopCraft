@@ -1,13 +1,18 @@
-<div *ngIf="!loading; else loadingTemplate" class="p-8">
-  <img [src]="product.image" alt="{{ product.title }}" class="w-full h-64 object-cover rounded-lg shadow-md">
-  <h1 class="text-3xl font-bold mt-4">{{ product.title }}</h1>
-  <p class="text-gray-600 mt-2">{{ product.description }}</p>
-  <p class="text-2xl font-bold text-indigo-600 mt-2">{{ product.price }} €</p>
-  <button class="bg-green-500 text-white px-4 py-2 rounded mt-4 hover:bg-green-700 transition" (click)="addToCart()">
-    Ajouter au panier
-  </button>
-</div>
+<div class="container mx-auto px-4 py-10">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10 bg-white shadow-lg rounded-lg overflow-hidden p-6">
+    <div class="flex justify-center">
+      <img [src]="product.image" alt="{{ product.title }}" class="rounded-lg shadow-md w-full max-w-md object-cover">
+    </div>
 
-<ng-template #loadingTemplate>
-  <p class="text-center text-gray-500">Chargement du produit...</p>
-</ng-template>
+    <div class="flex flex-col justify-center">
+      <h1 class="text-3xl font-extrabold text-gray-900 mb-4">{{ product.title }}</h1>
+      <p class="text-gray-600 text-lg mb-6">{{ product.description }}</p>
+      <p class="text-3xl font-bold text-indigo-600 mb-4">{{ product.price }} €</p>
+
+      <button (click)="addToCart()"
+              class="bg-gradient-to-r from-green-500 to-green-700 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:from-green-700 hover:to-green-900 shadow-md transition-transform transform hover:scale-105">
+        🛒 Ajouter au panier
+      </button>
+    </div>
+  </div>
+</div>
