@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {Product, ProductService} from '../../services/product.service';
-import {CommonModule} from '@angular/common';
-import {CartService} from '../../services/cart.service';
+import { Product, ProductService } from '../../services/product.service';
+import { CommonModule } from '@angular/common';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-details',
@@ -13,6 +13,7 @@ import {CartService} from '../../services/cart.service';
 })
 export class ProductDetailsComponent implements OnInit {
   product!: Product;
+  loading: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,22 +23,29 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.product = this.productService.getProductById(id);
+    this.productService.getProductById(id).subscribe({
+      next: (data) => {
+        this.product = data;
+        this.loading = false;
+      },
+      error: () => {
+        console.error("Erreur lors de la récupération du produit !");
+        this.loading = false;
+      }
+    });
   }
-
 
   addToCart() {
     if (this.product && this.product.id !== undefined) {
       this.cartService.addToCart({
         id: this.product.id,
-        name: this.product.name,
+        name: this.product.title,
         price: this.product.price,
         quantity: 1,
-        imageUrl : this.product.imageUrl
+        imageUrl: this.product.image
       });
     } else {
       console.error("Erreur : le produit est invalide ou n'a pas d'ID !");
     }
   }
-
 }

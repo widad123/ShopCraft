@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product, ProductService } from '../../services/product.service';
- import { NgForOf } from '@angular/common';
+import { NgForOf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -20,12 +20,18 @@ export class ProductListComponent implements OnInit {
   filteredProducts: Product[] = [];
   selectedCategory: string = '';
   selectedSort: string = '';
+  categories: string[] = [];
 
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.products = this.productService.getProducts();
-    this.filteredProducts = [...this.products];
+    this.productService.getProducts().subscribe(data => {
+      this.products = data;
+      this.filteredProducts = [...this.products];
+
+      // 🔹 Extraire les catégories uniques sans les dupliquer
+      this.categories = [...new Set(this.products.map(p => p.category))];
+    });
   }
 
   filterProducts() {
@@ -38,7 +44,7 @@ export class ProductListComponent implements OnInit {
     if (this.selectedSort === 'price') {
       this.filteredProducts.sort((a, b) => a.price - b.price);
     } else if (this.selectedSort === 'name') {
-      this.filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+      this.filteredProducts.sort((a, b) => a.title.localeCompare(b.title));
     }
   }
 }

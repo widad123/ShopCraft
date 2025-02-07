@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 export interface Product {
   id: number;
-  name: string;
+  title: string;
   description: string;
   price: number;
-  imageUrl: string;
+  image: string;
   category: string;
 }
 
@@ -13,36 +16,18 @@ export interface Product {
   providedIn: 'root'
 })
 export class ProductService {
-  private products: Product[] = [
-    {
-      id: 1,
-      name: 'Parfum Prada',
-      description: 'prada paradoxe parfume',
-      price: 100,
-      imageUrl: 'assets/parfum-prada.jpg',
-      category: 'Catégorie 1'
-    },
-    {
-      id: 2,
-      name: 'Parfum Georgio Armani',
-      description: 'parfum de la marque',
-      price: 150,
-      imageUrl: 'assets/parfum-ga.jpg',
-      category: 'Catégorie 2'
-    }
-  ];
+  private apiUrl = 'https://fakestoreapi.com/products';
 
-  getProducts(): Product[] {
-    return this.products;
-  }
+  constructor(private http: HttpClient) {}
 
-  getProductById(id: number): Product {
-    const product = this.products.find(product => product.id === id);
-    if (!product) {
-      throw new Error(`Produit avec ID ${id} non trouvé !`);
-    }
-    return product;
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiUrl).pipe(
+      tap(data => console.log("Données API reçues :", data))
+    );
   }
 
 
+  getProductById(id: number): Observable<Product> {
+    return this.http.get<Product>(`${this.apiUrl}/${id}`);
+  }
 }
