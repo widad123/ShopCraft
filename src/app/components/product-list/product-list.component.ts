@@ -25,14 +25,13 @@ export class ProductListComponent implements OnInit {
   selectedSort: string = '';
   categories: string[] = [];
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private cartService: CartService) {}
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe(data => {
       this.products = data;
       this.filteredProducts = [...this.products];
 
-      // 🔹 Extraire les catégories uniques sans les dupliquer
       this.categories = [...new Set(this.products.map(p => p.category))];
     });
   }
