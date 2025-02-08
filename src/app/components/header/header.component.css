@@ -62,15 +62,14 @@
   justify-content: center;
   min-width: 80px;
 }
-/* ✅ Agrandir `mat-menu` pour qu'il prenne toute la place disponible */
+
 ::ng-deep .mat-menu-panel {
-  width: 450px !important; /* ✅ Augmente la largeur */
-  max-height: none !important; /* ✅ Supprime la restriction de hauteur */
-  height: auto !important; /* ✅ Permet l'ajustement dynamique */
-  overflow: visible !important; /* ✅ Empêche le scroll */
+  width: 450px !important;
+  max-height: none !important;
+  height: auto !important;
+  overflow: visible !important;
 }
 
-/* ✅ Ajuste la taille du contenu */
 .cart-menu-content {
   width: 100%;
   height: auto !important;
@@ -78,7 +77,6 @@
   overflow: visible !important;
 }
 
-/* ✅ Ajuste `app-cart` pour qu'il prenne la largeur du menu */
 .cart-menu-content app-cart {
   display: block;
   width: 100%;
