@@ -1,0 +1,12 @@
+.product-card:hover {
+  box-shadow: 0 10px 20px rgba(72, 72, 255, 0.2), 0 6px 6px rgba(72, 72, 255, 0.2);
+}
+
+.product-image {
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.product-image:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
