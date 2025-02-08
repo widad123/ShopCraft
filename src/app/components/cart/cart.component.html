@@ -4,53 +4,54 @@
       <span class="cart-badge" *ngIf="totalItemsCount > 0"> : {{ totalItemsCount }}</span>
     </mat-card-title>
   </mat-card-header>
+
   <mat-card-content class="cart-content">
     <ng-container *ngIf="cartItems.length > 0; else emptyCart">
       <div *ngFor="let item of cartItems" class="cart-item">
+        <!-- ✅ Image + Infos Produit -->
         <div class="item-info">
-          <img class="cart-item-img " mat-card-sm-image [src]="item.imageUrl" alt="produit">
-          <div class="item-separator">
-          <h3 class="item-name">{{ item.name }}</h3>
-          <p class="item-price">
-            {{ item.price * item.quantity }} €
-          </p>
+          <img class="cart-item-img" mat-card-sm-image [src]="item.imageUrl" alt="produit">
+          <div class="item-details">
+            <h3 class="item-name">{{ item.name }}</h3>
+            <p class="item-price">{{ item.price * item.quantity }} €</p>
           </div>
         </div>
+
+        <!-- ✅ Gestion Quantité et Suppression sous le produit -->
         <div class="item-actions">
-            <button
-              class="item-quantity-button"
-              aria-label="Réduire la quantité"
-              [disabled]="item.quantity <= 1"
-              (click)="decrementQuantity(item.id)">
-              <mat-icon>remove</mat-icon>
-            </button>
+          <button
+            class="item-quantity-button"
+            aria-label="Réduire la quantité"
+            [disabled]="item.quantity <= 1"
+            (click)="decrementQuantity(item.id)">
+            <mat-icon>remove</mat-icon>
+          </button>
 
-            <input
-              class="item-quantity"
-              [(ngModel)]="item.quantity"
-              (ngModelChange)="updateQuantity(item.id, item.quantity)"
-              min="1"
-              required>
+          <span class="item-quantity">{{ item.quantity }}</span>
 
-            <button
-              class="item-quantity-button"
-              aria-label="Augmenter la quantité"
-              [disabled]="item.quantity >= maxQuantity"
-              (click)="incrementQuantity(item.id)">
-              <mat-icon>add</mat-icon>
-            </button>
+          <button
+            class="item-quantity-button"
+            aria-label="Augmenter la quantité"
+            [disabled]="item.quantity >= maxQuantity"
+            (click)="incrementQuantity(item.id)">
+            <mat-icon>add</mat-icon>
+          </button>
         </div>
+
+        <!-- ✅ Bouton supprimer bien aligné en dessous -->
         <div class="item-delete">
-          <button (click)="removeFromCart(item.id)">
+          <button (click)="removeFromCart(item.id)" class="delete-button">
             <mat-icon>delete_outline</mat-icon>
           </button>
         </div>
       </div>
+
       <div class="cart-total">
         <h3>Total : {{ totalPrice }} €</h3>
       </div>
     </ng-container>
   </mat-card-content>
+
   <div class="cart-actions" *ngIf="cartItems.length > 0">
     <button mat-raised-button color="accent" class="cart-button" (click)="clearCart()">Vider le panier</button>
   </div>

@@ -15,12 +15,14 @@
   <span class="spacer"></span>
 
   <div class="cart-trigger">
-    <button mat-icon-button [matMenuTriggerFor]="cartMenu">
-      <mat-icon>shopping_cart</mat-icon>
+    <button mat-icon-button [matMenuTriggerFor]="cartMenu" class="cart-button">
+      <mat-icon class="cart-icon">shopping_cart</mat-icon>
+      <div *ngIf="cartCount > 0" class="cart-badge">
+        {{ cartCount }}
+      </div>
     </button>
   </div>
 </mat-toolbar>
-
 
 <mat-menu #cartMenu="matMenu" class="cart-menu" xPosition="before">
   <div class="cart-menu-content">

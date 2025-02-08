@@ -1,10 +1,13 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatMenu, MatMenuTrigger} from '@angular/material/menu';
 import {MatToolbar} from '@angular/material/toolbar';
 import {MatIcon} from '@angular/material/icon';
 import {CartComponent} from '../cart/cart.component';
 import {MatAnchor, MatButton, MatIconButton} from '@angular/material/button';
 import {Router, RouterLink, RouterLinkActive} from '@angular/router';
+import { CartService } from '../../services/cart.service';
+import {NgIf} from '@angular/common';
+
 
 @Component({
   selector: 'app-header',
@@ -18,15 +21,23 @@ import {Router, RouterLink, RouterLinkActive} from '@angular/router';
     MatButton,
     RouterLink,
     MatAnchor,
-    RouterLinkActive
+    RouterLinkActive,
+    NgIf
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private cartService : CartService) {}
+  cartCount: number = 0;
 
+
+  ngOnInit() {
+    this.cartService.cartCount$.subscribe(count => {
+      this.cartCount = count;
+    });
+  }
   goToCart() {
     this.router.navigate(['/cart']);
   }
