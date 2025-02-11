@@ -4,6 +4,7 @@ import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../services/cart.service';
 import { Product } from '../../Models/Products';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-details',
@@ -19,7 +20,8 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -44,6 +46,12 @@ export class ProductDetailsComponent implements OnInit {
         price: this.product.price,
         quantity: 1,
         imageUrl: this.product.image
+      });
+      this.snackBar.open('Produit ajouté au panier !', 'Fermer', {
+        duration: 3000,
+        verticalPosition: 'top',
+        horizontalPosition: 'end',
+        panelClass: ['custom-snackbar']
       });
     } else {
       console.error("Erreur : le produit est invalide ou n'a pas d'ID !");

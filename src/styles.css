@@ -50,3 +50,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .main {
   flex: 1;
 }
+
+.custom-snackbar {
+  background: linear-gradient(to right, #9333ea, #312e81) !important;
+  color: white !important;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}

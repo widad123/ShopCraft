@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Product } from '../../Models/Products';
 import { CartService } from '../../services/cart.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class ProductListComponent implements OnInit {
   selectedSort: string = '';
   categories: string[] = [];
 
-  constructor(private productService: ProductService, private cartService: CartService) {}
+  constructor(private productService: ProductService, private cartService: CartService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe(data => {
@@ -57,6 +58,11 @@ export class ProductListComponent implements OnInit {
       quantity: 1,
       imageUrl: product.image
     });
-    alert('Produit ajouté au panier !');
+    this.snackBar.open('Produit ajouté au panier !', 'Fermer', {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'end',
+      panelClass: ['custom-snackbar']
+    });
   }
 }
