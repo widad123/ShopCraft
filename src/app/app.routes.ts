@@ -10,6 +10,7 @@ import {HomeComponent} from './components/home/home.component';
 import { OrderFormComponent } from './components/order-form/order-form.component';
 import {PaymentSuccessComponent} from './components/payment-success/payment-success.component';
 import {OrderConfirmationComponent} from './components/order-confirmation/order-confirmation.component';
+import {LoginComponent} from './components/login/login.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -20,6 +21,8 @@ export const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
+
   { path: 'orderForm' , component: OrderFormComponent},
   { path: 'payment-success' , component: PaymentSuccessComponent},
   { path: 'order-confirmation', component: OrderConfirmationComponent },
