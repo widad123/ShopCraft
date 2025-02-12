@@ -7,6 +7,7 @@ import {MatAnchor, MatButton, MatIconButton} from '@angular/material/button';
 import {Router, RouterLink, RouterLinkActive} from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import {NgIf} from '@angular/common';
+import {MatCardAvatar} from '@angular/material/card';
 import {SearchComponent} from '../search/search.component';
 
 
@@ -25,6 +26,8 @@ import {SearchComponent} from '../search/search.component';
     RouterLinkActive,
     NgIf,
     SearchComponent
+    NgIf,
+    MatCardAvatar,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
@@ -42,5 +45,8 @@ export class HeaderComponent implements OnInit{
   }
   goToCart() {
     this.router.navigate(['/cart']);
+  }
+  goToLogin() {
+    this.router.navigate(['/login']);
   }
 }

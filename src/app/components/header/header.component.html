@@ -5,11 +5,19 @@
 
   <nav class="nav-links">
     <a mat-button routerLink="/products" routerLinkActive="active-link">PRODUITS</a>
+    <a mat-button routerLink="/cart" routerLinkActive="active-link">PANIER</a>
+    <a mat-button routerLink="/profile" routerLinkActive="active-link">PROFIL</a>
     <a mat-button routerLink="/about" routerLinkActive="active-link">ABOUT US</a>
     <a mat-button routerLink="/contact" routerLinkActive="active-link">CONTACT</a>
   </nav>
+
   <app-search class="component-search"></app-search>
 
+  <div class="login">
+    <button mat-card-avatar (click)="goToLogin()">
+      <mat-icon>login</mat-icon>
+    </button>
+  </div>
   <div class="cart-trigger">
     <button mat-icon-button [matMenuTriggerFor]="cartMenu" class="cart-button">
       <mat-icon class="cart-icon">shopping_cart</mat-icon>
