@@ -11,9 +11,13 @@
     <a mat-button routerLink="/contact" routerLinkActive="active-link">CONTACT</a>
 
   </nav>
-
   <span class="spacer"></span>
 
+  <div class="login">
+    <button mat-card-avatar (click)="goToLogin()">
+      <mat-icon>login</mat-icon>
+    </button>
+  </div>
   <div class="cart-trigger">
     <button mat-icon-button [matMenuTriggerFor]="cartMenu" class="cart-button">
       <mat-icon class="cart-icon">shopping_cart</mat-icon>
