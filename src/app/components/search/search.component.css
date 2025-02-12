@@ -1,0 +1,90 @@
+::ng-deep .mat-mdc-autocomplete-panel {
+  background: white !important;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15) !important;
+  border-radius: 8px !important;
+  padding: 5px 0 !important;
+}
+
+
+::ng-deep .mat-mdc-option {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 12px !important;
+  transition: background 0.3s ease-in-out !important;
+}
+
+.search-suggestion {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.product-image {
+  width: 60px !important;
+  height: 60px !important;
+  object-fit: cover !important;
+  border-radius: 8px !important;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1) !important;
+  margin-right: 8px !important;
+}
+
+.product-title {
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  color: #333 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  flex-grow: 1 !important;
+  text-align: left !important;
+}
+
+::ng-deep .mat-mdc-option:hover {
+  background: #f8f8f8 !important;
+  border-radius: 5px !important;
+}
+
+.search-bar {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  border-radius: 50px !important;
+  height: auto !important;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0 !important;
+}
+
+::ng-deep .mat-input-element {
+  color: gray !important;
+  font-size: 1rem;
+}
+
+.mat-icon-search {
+  color: gray !important;
+  font-size: 1.5rem !important;
+}
+
+
+.placeholder-text::placeholder {
+  padding-left: .2rem !important;
+  color: gray !important;
+}
+
+.placeholder-text {
+  padding-left: 1.6rem !important;
+  color: gray !important;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  border-radius: 50px !important;
+  overflow: hidden !important;
+  background: white !important;
+}
+
+::ng-deep .mat-mdc-form-field-outline {
+  border: none !important;
+}
+

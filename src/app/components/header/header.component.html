@@ -5,14 +5,10 @@
 
   <nav class="nav-links">
     <a mat-button routerLink="/products" routerLinkActive="active-link">PRODUITS</a>
-    <a mat-button routerLink="/cart" routerLinkActive="active-link">PANIER</a>
-    <a mat-button routerLink="/profile" routerLinkActive="active-link">PROFIL</a>
     <a mat-button routerLink="/about" routerLinkActive="active-link">ABOUT US</a>
     <a mat-button routerLink="/contact" routerLinkActive="active-link">CONTACT</a>
-
   </nav>
-
-  <span class="spacer"></span>
+  <app-search class="component-search"></app-search>
 
   <div class="cart-trigger">
     <button mat-icon-button [matMenuTriggerFor]="cartMenu" class="cart-button">

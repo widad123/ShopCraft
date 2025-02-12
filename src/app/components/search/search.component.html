@@ -1,0 +1,13 @@
+<mat-form-field class="search-bar" appearance="outline" floatLabel="auto">
+  <input type="search" matInput [formControl]="searchControl" [matAutocomplete]="auto" placeholder="Rechercher un produit" class="placeholder-text">
+  <mat-icon matSuffix class="mat-icon-search">search</mat-icon>
+</mat-form-field>
+
+<mat-autocomplete #auto="matAutocomplete">
+  <mat-option *ngFor="let product of filteredProducts$ | async" (click)="goToProduct(product.id)" class="custom-option">
+    <div class="search-suggestion">
+      <img [src]="product.image" class="product-image" alt="produit">
+      <span class="product-title">{{ product.title }}</span>
+    </div>
+  </mat-option>
+</mat-autocomplete>

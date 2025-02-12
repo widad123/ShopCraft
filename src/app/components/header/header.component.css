@@ -1,4 +1,3 @@
-/* Header */
 .header {
   background: linear-gradient(135deg, #0f0c29, #5b5478, #24243e);
   color: white;
@@ -107,3 +106,7 @@
   width: 100%;
 }
 
+.component-search{
+  width: 800px !important;
+  height: 3.4rem !important;
+}

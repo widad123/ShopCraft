@@ -7,6 +7,7 @@ import {MatAnchor, MatButton, MatIconButton} from '@angular/material/button';
 import {Router, RouterLink, RouterLinkActive} from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import {NgIf} from '@angular/common';
+import {SearchComponent} from '../search/search.component';
 
 
 @Component({
@@ -22,7 +23,8 @@ import {NgIf} from '@angular/common';
     RouterLink,
     MatAnchor,
     RouterLinkActive,
-    NgIf
+    NgIf,
+    SearchComponent
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
