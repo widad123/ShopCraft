@@ -1,0 +1,187 @@
+<mat-card class="order-card">
+  <h2 class="title">🛒 Passer une commande</h2>
+
+
+
+  <mat-stepper linear>
+
+    <mat-step [stepControl]="personalInfoForm" [@fadeInOut]>
+      <form [formGroup]="personalInfoForm">
+
+        <ng-template matStepLabel>Informations personnelles</ng-template>
+
+        <!-- Email en premier -->
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="ex: jean.dupont@email.com" required>
+          <mat-icon matSuffix *ngIf="isFieldValid(personalInfoForm, 'email')">check_circle</mat-icon>
+          <mat-error *ngIf="isFieldInvalid(personalInfoForm, 'email')">Email invalide</mat-error>
+        </mat-form-field>
+
+        <!-- Nom complet -->
+        <mat-form-field appearance="fill">
+          <mat-label>Nom complet</mat-label>
+          <input matInput formControlName="fullName" placeholder="ex: Jean Dupont" required>
+          <mat-icon matSuffix *ngIf="isFieldValid(personalInfoForm, 'fullName')">check_circle</mat-icon>
+          <mat-error *ngIf="isFieldInvalid(personalInfoForm, 'fullName')">Nom obligatoire (min 3 caractères)</mat-error>
+        </mat-form-field>
+
+        <!-- Téléphone -->
+        <mat-form-field appearance="fill">
+          <mat-label>Téléphone</mat-label>
+          <input matInput formControlName="phone" placeholder="ex: +33 6 12 34 56 78" required>
+          <mat-icon matSuffix *ngIf="isFieldValid(personalInfoForm, 'phone')">check_circle</mat-icon>
+          <mat-error *ngIf="isFieldInvalid(personalInfoForm, 'phone')">
+            Numéro invalide (10 chiffres)
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Barre de progression -->
+        <div class="progress-container">
+          <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+        </div>
+
+        <!-- Bouton "Suivant" désactivé si le formulaire est invalide -->
+        <div class="buttons-container">
+          <button mat-button matStepperNext class="step-button" [disabled]="personalInfoForm.invalid">
+            Suivant
+          </button>
+        </div>
+
+      </form>
+    </mat-step>
+
+
+    <!-- Étape 2: Adresse -->
+    <mat-step [stepControl]="addressForm">
+      <form [formGroup]="addressForm">
+
+        <ng-template matStepLabel>🚚 Adresse de livraison</ng-template>
+
+        <!-- Adresse complète -->
+        <mat-form-field class="full-width">
+          <mat-label>Adresse complète</mat-label>
+          <input matInput formControlName="address" type="text" required placeholder="Ex: 10 rue des Lilas, Paris">
+          <mat-icon matSuffix *ngIf="isFieldValid(addressForm, 'address')">check_circle</mat-icon>
+          <mat-error *ngIf="isFieldInvalid(addressForm, 'address')">
+            Adresse obligatoire
+          </mat-error>
+        </mat-form-field>
+
+        <div class="row">
+          <!-- Ville -->
+          <mat-form-field class="half-width">
+            <mat-label>Ville</mat-label>
+            <input matInput formControlName="city" required placeholder="Ex: Paris">
+            <mat-icon matSuffix *ngIf="isFieldValid(addressForm, 'city')">check_circle</mat-icon>
+            <mat-error *ngIf="isFieldInvalid(addressForm, 'city')">Ville obligatoire</mat-error>
+          </mat-form-field>
+
+          <!-- Code Postal -->
+          <mat-form-field class="half-width">
+            <mat-label>Code postal</mat-label>
+            <input matInput formControlName="zipCode" required placeholder="Ex: 75000">
+            <mat-icon matSuffix *ngIf="isFieldValid(addressForm, 'zipCode')">check_circle</mat-icon>
+            <mat-error *ngIf="isFieldInvalid(addressForm, 'zipCode')">
+              Code postal invalide (5 chiffres)
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Mode de livraison -->
+        <mat-label>Mode de livraison</mat-label>
+        <mat-radio-group formControlName="deliveryMethod" class="delivery-options">
+          <mat-radio-button value="standard">📦 Livraison Standard (3-5 jours)</mat-radio-button>
+          <mat-radio-button value="express">⚡ Livraison Express (24h)</mat-radio-button>
+          <mat-radio-button value="pickup">🏪 Retrait en Point Relais</mat-radio-button>
+        </mat-radio-group>
+
+        <!-- Points relais -->
+        <div *ngIf="addressForm.get('deliveryMethod')?.value === 'pickup'" class="relay-options">
+          <mat-label>Choisissez un point relais :</mat-label>
+          <mat-radio-group formControlName="selectedRelay">
+            <mat-radio-button *ngFor="let relay of pointsRelais" [value]="relay.id">
+              {{ relay.name }} - {{ relay.address }}
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <!-- Boutons -->
+        <div class="buttons-container">
+          <button mat-button matStepperPrevious class="step-button">⬅️ Retour</button>
+          <button mat-button matStepperNext class="step-button" [disabled]="addressForm.invalid">➡️ Suivant</button>
+        </div>
+
+      </form>
+    </mat-step>
+
+
+    <!-- Étape 3: Mode de paiement -->
+    <mat-step [stepControl]="paymentForm">
+      <form [formGroup]="paymentForm">
+        <ng-template matStepLabel>💳 Mode de paiement</ng-template>
+
+        <!-- Choix du mode de paiement -->
+        <mat-radio-group formControlName="paymentMethod" class="payment-method">
+          <mat-radio-button value="credit">💳 Carte de crédit</mat-radio-button>
+          <mat-radio-button value="cash">💵 Paiement à la livraison</mat-radio-button>
+        </mat-radio-group>
+
+        <!-- Formulaire de carte bancaire (affiché uniquement si paiement par carte) -->
+        <div *ngIf="paymentForm.get('paymentMethod')?.value === 'credit'" class="credit-info-form">
+
+          <!-- Sécurité & Logo -->
+          <div class="payment-header">
+            <span class="payment-title">Payer en ligne</span>
+            <img src="assets/securite.png" alt="Sécurité" class="security-logo">
+          </div>
+          <img src="assets/modesPaiement.png" alt="Cartes acceptées" class="accepted-cards">
+
+          <!-- Champs de la carte -->
+          <div class="payment-fields">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Nom sur la carte</mat-label>
+              <input matInput formControlName="cardName" placeholder="Nom Prénom" required>
+              <mat-icon matSuffix *ngIf="isFieldValid(paymentForm, 'cardName')">check_circle</mat-icon>
+              <mat-error *ngIf="isFieldInvalid(paymentForm, 'cardName')">Le nom sur la carte est requis.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Numéro de carte</mat-label>
+              <input matInput formControlName="cardNumber" placeholder="**** **** **** ****" (input)="formatCardNumber($event)" required>
+              <mat-icon matSuffix *ngIf="isFieldValid(paymentForm, 'cardNumber')">check_circle</mat-icon>
+              <mat-error *ngIf="isFieldInvalid(paymentForm, 'cardNumber')">Numéro de carte invalide.</mat-error>
+            </mat-form-field>
+
+            <div class="card-details">
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Date d'expiration</mat-label>
+                <input matInput formControlName="expirationDate" placeholder="MM/AA" (input)="formatExpirationDate($event)">
+                <mat-icon matSuffix *ngIf="isFieldValid(paymentForm, 'expirationDate')">check_circle</mat-icon>
+                <mat-error *ngIf="isFieldInvalid(paymentForm, 'expirationDate')">Format invalide (MM/AA).</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-label>CVV</mat-label>
+                <input matInput formControlName="cvv" placeholder="•••" (input)="formatCVV($event)" required>
+                <mat-icon matSuffix *ngIf="isFieldValid(paymentForm, 'cvv')">check_circle</mat-icon>
+                <mat-error *ngIf="isFieldInvalid(paymentForm, 'cvv')">CVV invalide.</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <!-- Boutons -->
+        <div class="buttons-container">
+          <button mat-button matStepperPrevious class="step-button back-button">Retour</button>
+          <button class="pay-button" [disabled]="paymentForm.invalid" (click)="submitOrder()">
+            <span class="material-icons">lock</span> Payer
+          </button>
+        </div>
+
+      </form>
+    </mat-step>
+
+
+  </mat-stepper>
+</mat-card>
