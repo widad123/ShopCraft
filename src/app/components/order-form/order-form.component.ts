@@ -37,6 +37,7 @@ export class OrderFormComponent {
   addressForm!: FormGroup;
   paymentForm!: FormGroup;
   progress = 0;
+  isCreditPayment = true;
 
   pointsRelais = [
     { id: 1, name: 'Relais 1', address: '10 rue des Lilas, Paris' },
@@ -84,6 +85,8 @@ export class OrderFormComponent {
     });
 
     this.paymentForm.get('paymentMethod')?.valueChanges.subscribe(value => {
+      this.isCreditPayment = value === 'credit';
+
       if (value === 'cash') {
         this.disableCardFields();
       } else {
@@ -123,12 +126,13 @@ export class OrderFormComponent {
   }
 
   enableCardFields() {
-    this.paymentForm.get('cardName')?.setValidators([Validators.required]);
-    this.paymentForm.get('cardNumber')?.setValidators([Validators.required, Validators.pattern(/^\d{4} ?\d{4} ?\d{4} ?\d{4}$/)]);
-    this.paymentForm.get('expirationDate')?.setValidators([Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/)]);
-    this.paymentForm.get('cvv')?.setValidators([Validators.required, Validators.pattern(/^\d{3,4}$/)]);
+    ['cardName', 'cardNumber', 'expirationDate', 'cvv'].forEach(field => {
+      this.paymentForm.get(field)?.setValidators([Validators.required]);
+      this.paymentForm.get(field)?.enable();
+    });
     this.paymentForm.updateValueAndValidity();
   }
+
 
   updateProgress() {
     const controls = this.personalInfoForm.controls;
@@ -172,7 +176,12 @@ export class OrderFormComponent {
   submitOrder() {
     if (this.paymentForm.valid) {
       console.log("Commande soumise avec succès !");
-      this.router.navigate(['/payment-success']);
+
+      if (this.paymentForm.get('paymentMethod')?.value === 'credit') {
+        this.router.navigate(['/payment-success']);
+      } else {
+        this.router.navigate(['/order-confirmation']);
+      }
     } else {
       this.paymentForm.markAllAsTouched();
     }
