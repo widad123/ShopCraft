@@ -8,6 +8,7 @@ import {Router, RouterLink, RouterLinkActive} from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import {NgIf} from '@angular/common';
 import {MatCardAvatar} from '@angular/material/card';
+import {MatCardAvatar} from '@angular/material/card';
 import {SearchComponent} from '../search/search.component';
 
 
@@ -25,7 +26,7 @@ import {SearchComponent} from '../search/search.component';
     MatAnchor,
     RouterLinkActive,
     NgIf,
-    SearchComponent
+    SearchComponent,
     NgIf,
     MatCardAvatar,
   ],
