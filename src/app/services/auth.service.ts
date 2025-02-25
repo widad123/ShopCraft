@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -6,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class AuthService {
 
   private clientId ='651532476254-5jhho4a5pu336asn11top7bi4k6hlobp.apps.googleusercontent.com';
-  constructor() {
+  constructor(private router: Router) {
     setTimeout(() => {
       this.loadGoogleAuth();
     }, 500);
@@ -41,7 +42,7 @@ export class AuthService {
     const token = response.credential;
     const user = this.decodeJwt(token);
     localStorage.setItem('user', JSON.stringify(user));
-    window.location.href = "/home";
+    this.router.navigate(['/home']);
   }
 
   private decodeJwt(token: string) {
