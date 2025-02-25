@@ -1,6 +1,36 @@
-<div *ngIf="user">
-  <h2> Bienvenue,{{user.name}} !</h2>
-  <img [src] = "user.picture" alt="Photo de profil">
-  <p>Email: {{ user.email }}</p>
-  <button (click)="logout()" >Se déconnecter</button>
+<div class="profile-container">
+    <div class="profile-card">
+        <div class="profile-header">
+            <img [src]="userProfilePicture" class="profile-avatar" alt="Photo de profil">
+            <h2 class="user-name">{{ userName }}</h2>
+            <p class="user-email">{{ userEmail }}</p>
+        </div>
+
+        <div class="profile-info">
+            <h3>Informations personnelles</h3>
+            <div>
+                <span class="info-label">Nom :</span>
+                <span class="info-value">{{ userName }}</span>
+            </div>
+            <div>
+                <span class="info-label">Email :</span>
+                <span class="info-value">{{ userEmail }}</span>
+            </div>
+            <div>
+                <span class="info-label">Téléphone :</span>
+                <span class="info-value">{{ userPhone || 'Non renseigné' }}</span>
+            </div>
+            <div>
+                <span class="info-label">Adresse :</span>
+                <span class="info-value">{{ userAddress || 'Non renseignée' }}</span>
+            </div>
+        </div>
+
+
+        <div class="profile-actions">
+            <button mat-raised-button color="primary" (click)="editProfile()">Modifier le profil</button>
+
+            <button mat-raised-button color="warn" (click)="logout()">Déconnexion</button>
+        </div>
+    </div>
 </div>

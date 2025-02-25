@@ -1,25 +1,49 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../services/auth.service';
-import {NgIf} from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import {MatButton} from "@angular/material/button";
 
 @Component({
   selector: 'app-profile',
-  imports: [
-    NgIf
-  ],
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  imports: [
+    MatButton
+  ],
+  styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit{
+export class ProfileComponent implements OnInit {
+  userProfilePicture: string = 'assets/default-avatar.png';
+  userName: string = 'Utilisateur';
+  userEmail: string = '';
+  userPhone: string = '';
+  userAddress: string = '';
 
-  user:any=null;
-  constructor(private authService : AuthService) {
-  }
+
+  constructor(private authService: AuthService, private router: Router) {}
+
   ngOnInit() {
-    this.user = this.authService.getUser();
+    this.loadUserData();
   }
-  logout(){
+
+  loadUserData() {
+    const userData = localStorage.getItem('user');
+
+    if (userData) {
+      const user = JSON.parse(userData);
+      this.userProfilePicture = user.picture || 'assets/default-avatar.png';
+      this.userName = user.name || 'Utilisateur';
+      this.userEmail = user.email || '';
+      this.userPhone = user.phone || '';
+      this.userAddress = user.address || '';
+    }
+  }
+
+  editProfile() {
+    //Todo in other branche
+  }
+
+  logout() {
     this.authService.logout();
-    window.location.href = '/login';
+    this.router.navigate(['/']);
   }
 }

@@ -52,6 +52,10 @@ export class HeaderComponent implements OnInit{
     });
   }
 
+  toggleTheme() {
+    document.body.classList.toggle('dark-theme');
+  }
+
   toggleUserMenu(event: Event) {
     const trigger = event.target as HTMLElement;
     trigger.click();
