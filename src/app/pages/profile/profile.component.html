@@ -1,0 +1,6 @@
+<div *ngIf="user">
+  <h2> Bienvenue,{{user.name}} !</h2>
+  <img [src] = "user.picture" alt="Photo de profil">
+  <p>Email: {{ user.email }}</p>
+  <button (click)="logout()" >Se déconnecter</button>
+</div>
