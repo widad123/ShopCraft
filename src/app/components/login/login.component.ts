@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  userProfilePicture: string = 'assets/default-avatar.png';
 
   constructor(private authService : AuthService) {
     const user = this.authService.getUser();
@@ -19,4 +20,13 @@ export class LoginComponent {
   loginWithGoogle(){
      this.authService.loginWithGoogle();
   }
+  logout() {
+    this.authService.logout();
+    this.userProfilePicture = 'assets/default-avatar.png';
+  }
+
+  isLoggedIn(): boolean {
+    return this.authService.getUser() !== null;
+  }
+
 }
