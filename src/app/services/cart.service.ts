@@ -9,6 +9,9 @@ export class CartService {
   private cart: CartItem[] = [];
   private cartCount = new BehaviorSubject<number>(0);
   private cartSubject = new BehaviorSubject<CartItem[]>([]);
+  private totalPriceSubject = new BehaviorSubject<number>(0);
+  totalPrice$ = this.totalPriceSubject.asObservable();
+
   cart$ = this.cartSubject.asObservable();
   cartCount$ = this.cartCount.asObservable();
 
@@ -17,6 +20,7 @@ export class CartService {
     if (storedCart) {
     this.cart = JSON.parse(storedCart);
     this.cartSubject.next([...this.cart]);
+      this.updateTotalPrice();
     }
   }
 
@@ -31,6 +35,7 @@ export class CartService {
 
     }
     this.cartSubject.next([...this.cart]);
+      this.updateTotalPrice();
     localStorage.setItem('cart', JSON.stringify(this.cart));
   }
 
@@ -39,6 +44,7 @@ export class CartService {
     if (index !== -1) {
       this.cart[index].quantity++;
       this.cartSubject.next([...this.cart]);
+      this.updateTotalPrice();
       this.updateCartCount();
       localStorage.setItem('cart', JSON.stringify(this.cart));
     }
@@ -53,6 +59,7 @@ export class CartService {
         this.cart.splice(index, 1);
       }
       this.cartSubject.next([...this.cart]);
+      this.updateTotalPrice();
       this.updateCartCount();
       localStorage.setItem('cart', JSON.stringify(this.cart));
     }
@@ -61,6 +68,7 @@ export class CartService {
   removeFromCart(productId: number) {
     this.cart = this.cart.filter(item => item.id !== productId);
     this.cartSubject.next([...this.cart]);
+    this.updateTotalPrice();
     this.updateCartCount();
     localStorage.setItem('cart', JSON.stringify(this.cart));
 
@@ -69,6 +77,7 @@ export class CartService {
   clearCart() {
     this.cart = [];
     this.cartSubject.next([...this.cart]);
+    this.updateTotalPrice();
     this.updateCartCount();
     localStorage.removeItem('cart');
   }
@@ -78,7 +87,7 @@ export class CartService {
   }
 
   getTotalPrice(): number {
-    return this.cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    return parseFloat(this.cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2));
   }
 
   updateQuantity(productId: number, quantity: number) {
@@ -92,6 +101,11 @@ export class CartService {
   getTotalItemsCount(): number {
     return this.cart.reduce((total, item) => total + item.quantity, 0);
   }
+
+  private updateTotalPrice() {
+    this.totalPriceSubject.next(parseFloat(this.getTotalPrice().toFixed(2)));
+  }
+
   private updateCartCount() {
     this.cartCount.next(this.getTotalItemsCount());
     this.cartSubject.next([...this.cart]);
