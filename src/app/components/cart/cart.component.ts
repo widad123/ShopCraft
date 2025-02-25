@@ -12,6 +12,7 @@ import {
 } from '@angular/material/card';
 import {MatButton } from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -26,7 +27,7 @@ export class CartComponent implements OnInit {
   maxQuantity: number = 10;
   totalItemsCount = 0;
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private router: Router) {}
 
   ngOnInit(): void {
     this.cartService.getCart().subscribe(cart => {
@@ -62,5 +63,9 @@ export class CartComponent implements OnInit {
       this.cartService.updateQuantity(id, newQuantity);
       this.totalPrice = this.cartService.getTotalPrice();
     }
+  }
+
+  goToCheckout() {
+    this.router.navigate(['/orderForm']);
   }
 }

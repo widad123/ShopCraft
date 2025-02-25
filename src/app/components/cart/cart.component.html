@@ -54,6 +54,9 @@
 
   <div class="cart-actions" *ngIf="cartItems.length > 0">
     <button mat-raised-button color="accent" class="cart-button" (click)="clearCart()">Vider le panier</button>
+    <button mat-raised-button color="primary" class="cart-button checkout-button" (click)="goToCheckout()">
+      Valider ma commande
+    </button>
   </div>
 </mat-card>
 
