@@ -25,8 +25,8 @@ import {AuthService} from '../../services/auth.service';
     MatAnchor,
     RouterLinkActive,
     NgIf,
-    SearchComponent,
-    MatMenuItem
+    MatMenuItem,
+    SearchComponent
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
