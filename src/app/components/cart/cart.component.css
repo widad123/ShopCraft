@@ -89,12 +89,25 @@
 .cart-actions {
   display: flex;
   justify-content: center;
-  padding: 10px;
+  gap: 15px;
+  margin-top: 20px;
 }
 
 .cart-button {
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
   width: 100%;
-  text-align: center;
-  margin-top: 10px;
-  padding: 10px;
+  max-width: 200px;
+}
+
+.checkout-button {
+  background-color: #8f85bd;
+  color: white;
+}
+
+.checkout-button:hover {
+  background-color: #a39ebf;
 }
