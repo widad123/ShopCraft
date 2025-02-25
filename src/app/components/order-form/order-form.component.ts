@@ -10,6 +10,8 @@ import { CommonModule } from '@angular/common';
 import {MatIcon} from '@angular/material/icon';
 import {MatProgressBar} from '@angular/material/progress-bar';
 import { Router } from '@angular/router';
+import {AuthService} from "../../services/auth.service";
+import {CartService} from "../../services/cart.service";
 
 declare var google: any;
 
@@ -38,6 +40,8 @@ export class OrderFormComponent {
   paymentForm!: FormGroup;
   progress = 0;
   isCreditPayment = true;
+  user: any = null;
+  totalPrice = 0;
 
   pointsRelais = [
     { id: 1, name: 'Relais 1', address: '10 rue des Lilas, Paris' },
@@ -45,9 +49,13 @@ export class OrderFormComponent {
     { id: 3, name: 'Relais 3', address: '15 rue de la Paix, Paris' }
   ];
 
-  constructor(private fb: FormBuilder, private ngZone: NgZone, private router: Router) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private cartService: CartService) {
     this.createForms();
     this.handleFormChanges();
+    this.getUserInfo();
+    this.cartService.totalPrice$.subscribe(price => {
+      this.totalPrice = price;
+    });
   }
 
   createForms() {
@@ -95,6 +103,17 @@ export class OrderFormComponent {
     });
 
     this.personalInfoForm.valueChanges.subscribe(() => this.updateProgress());
+  }
+
+  getUserInfo() {
+    this.user = this.authService.getUser();
+
+    if (this.user) {
+      this.personalInfoForm.patchValue({
+        fullName: this.user.name,
+        email: this.user.email
+      });
+    }
   }
 
   disableAddressFields() {
