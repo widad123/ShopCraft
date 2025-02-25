@@ -1,0 +1,30 @@
+<div class="edit-profile-container">
+  <h2>Modifier mon profil</h2>
+
+  <form (ngSubmit)="saveChanges()">
+    <mat-form-field>
+      <mat-label>Nom</mat-label>
+      <input matInput [(ngModel)]="userName" name="name" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput [(ngModel)]="userEmail" name="email" type="email" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Téléphone</mat-label>
+      <input matInput [(ngModel)]="userPhone" name="phone">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Adresse</mat-label>
+      <input matInput [(ngModel)]="userAddress" name="address">
+    </mat-form-field>
+
+    <div class="edit-profile-actions">
+      <button mat-raised-button class="save-button" type="submit" [disabled]="!isModified()">Enregistrer</button>
+      <button mat-raised-button class="cancel-button" (click)="cancel()">Annuler</button>
+    </div>
+  </form>
+</div>
