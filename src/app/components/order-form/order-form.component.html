@@ -13,7 +13,7 @@
         <!-- Email en premier -->
         <mat-form-field appearance="fill">
           <mat-label>Email</mat-label>
-          <input matInput type="email" formControlName="email" placeholder="ex: jean.dupont@email.com" required>
+          <input matInput type="email" formControlName="email" placeholder="ex: jean.dupont@email.com" required [readonly]="user">
           <mat-icon matSuffix *ngIf="isFieldValid(personalInfoForm, 'email')">check_circle</mat-icon>
           <mat-error *ngIf="isFieldInvalid(personalInfoForm, 'email')">Email invalide</mat-error>
         </mat-form-field>
@@ -21,7 +21,7 @@
         <!-- Nom complet -->
         <mat-form-field appearance="fill">
           <mat-label>Nom complet</mat-label>
-          <input matInput formControlName="fullName" placeholder="ex: Jean Dupont" required>
+          <input matInput formControlName="fullName" placeholder="ex: Jean Dupont" required [readonly]="user">
           <mat-icon matSuffix *ngIf="isFieldValid(personalInfoForm, 'fullName')">check_circle</mat-icon>
           <mat-error *ngIf="isFieldInvalid(personalInfoForm, 'fullName')">Nom obligatoire (min 3 caractères)</mat-error>
         </mat-form-field>
@@ -176,7 +176,7 @@
           <button mat-button matStepperPrevious class="step-button back-button">Retour</button>
           <button class="pay-button" [disabled]="paymentForm.invalid" (click)="submitOrder()">
             <span class="material-icons" *ngIf="isCreditPayment">lock</span>
-            {{ isCreditPayment ? 'Payer' : 'Valider ma commande' }}
+            {{ isCreditPayment ? 'Payer ' : 'Valider ma commande ' }} : {{ totalPrice | number:'1.2-2' }} €
           </button>
         </div>
 
