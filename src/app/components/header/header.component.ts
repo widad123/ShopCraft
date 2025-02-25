@@ -9,6 +9,7 @@ import { CartService } from '../../services/cart.service';
 import {NgIf} from '@angular/common';
 import {SearchComponent} from '../search/search.component';
 import {AuthService} from '../../services/auth.service';
+import {ThemeService} from '../../services/theme.service';
 
 
 @Component({
@@ -36,14 +37,25 @@ export class HeaderComponent implements OnInit{
   userProfilePicture: string = 'assets/profile.png';
   userName: string ="Invité";
   userEmail: string|undefined;
-  constructor(private router: Router, private cartService : CartService, private authService :AuthService) {
+
+  isDarkMode: boolean = false;
+
+  constructor(private router: Router, private cartService : CartService, private authService :AuthService, public themeService :ThemeService ){
     const user = this.authService.getUser();
     if (user) {
       console.log("🔄 Utilisateur déjà connecté :", user);
       this.loadUserData();
 
     }
+
+    this.isDarkMode = this.themeService.getIsDarkMode();
   }
+
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
+    this.isDarkMode = this.themeService.getIsDarkMode();
+  }
+
 
 
   ngOnInit() {
@@ -52,9 +64,7 @@ export class HeaderComponent implements OnInit{
     });
   }
 
-  toggleTheme() {
-    document.body.classList.toggle('dark-theme');
-  }
+
 
   toggleUserMenu(event: Event) {
     const trigger = event.target as HTMLElement;

@@ -194,16 +194,6 @@ mat-menu-item {
   height: 20px;
 }
 
-.dark-theme {
-  background: #121212;
-  color: white;
-}
-
-.dark-theme .profile-card {
-  background: #1e1e1e;
-  color: white;
-}
-
 
 .user-avatar {
   width: 48px;

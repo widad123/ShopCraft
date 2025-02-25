@@ -186,3 +186,21 @@ button[disabled] {
   background-color: #c9c7dc !important;
   color: white !important;
 }
+
+body {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.dark-theme {
+  background: black !important;
+  color: white !important;
+}
+
+.dark-theme mat-toolbar {
+  background: #222 !important;
+}
+
+.dark-theme .nav-links a {
+  color: #ddd !important;
+}

@@ -2,6 +2,7 @@ import {Component, inject} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {FooterComponent} from './components/footer/footer.component';
 import {HeaderComponent} from './components/header/header.component';
+import {ThemeService} from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ import {HeaderComponent} from './components/header/header.component';
 export class AppComponent {
   title = 'my-ecommerce-app';
 
-  constructor() {
+  constructor(private themeService : ThemeService) {
 
   }
 }

@@ -7,14 +7,19 @@
     <a mat-button routerLink="/products" routerLinkActive="active-link">PRODUITS</a>
     <a mat-button routerLink="/about" routerLinkActive="active-link">ABOUT US</a>
     <a mat-button routerLink="/contact" routerLinkActive="active-link">CONTACT</a>
-
   </nav>
+
   <span class="spacer"></span>
+
+
   <app-search class="component-search"></app-search>
+
   <span class="spacer"></span>
 
   <div class="theme-switcher">
-    <button mat-button (click)="toggleTheme()"> Changer le thème</button> //TODO in other branc
+    <button mat-icon-button (click)="toggleTheme()">
+      <mat-icon>{{ isDarkMode ? 'light_mode' : 'dark_mode' }}</mat-icon>
+    </button>
   </div>
 
   <div class="login">
@@ -24,7 +29,6 @@
     </button>
   </div>
 
-
   <div class="cart-trigger">
     <button mat-icon-button [matMenuTriggerFor]="cartMenu" class="cart-button">
       <mat-icon class="cart-icon">shopping_cart</mat-icon>
@@ -32,38 +36,38 @@
         {{ cartCount }}
       </div>
     </button>
-    <mat-menu #userMenu="matMenu" class="user-menu">
-      <div class="user-info" *ngIf="isLoggedIn()">
-        <img [src]="userProfilePicture" class="user-avatar" alt="Photo de profil">
-        <div class="user-details">
-          <span class="user-name">Bonjour, {{ userName }}</span>
-          <span class="user-email">{{ userEmail }}</span>
-        </div>
-      </div>
-
-      <ng-container *ngIf="isLoggedIn(); else loginMenu">
-        <button mat-menu-item (click)="goToProfile()">
-          <mat-icon>person</mat-icon>
-          Afficher le profil
-        </button>
-
-        <button mat-menu-item (click)="logout()">
-          <mat-icon>logout</mat-icon>
-          Déconnexion
-        </button>
-      </ng-container>
-
-      <ng-template #loginMenu>
-        <button mat-menu-item class="google-signin-btn" *ngIf="!isLoggedIn()" (click)="loginWithGoogle()">
-          <span class="google-signin-content">
-            <img src="assets/logo-google.png" class="google-icon" alt="Google Logo">
-            <span>Se connecter avec Google</span>
-          </span>
-
-        </button>
-      </ng-template>
-    </mat-menu>
   </div>
+
+  <mat-menu #userMenu="matMenu" class="user-menu">
+    <div class="user-info" *ngIf="isLoggedIn()">
+      <img [src]="userProfilePicture" class="user-avatar" alt="Photo de profil">
+      <div class="user-details">
+        <span class="user-name">Bonjour, {{ userName }}</span>
+        <span class="user-email">{{ userEmail }}</span>
+      </div>
+    </div>
+
+    <ng-container *ngIf="isLoggedIn(); else loginMenu">
+      <button mat-menu-item (click)="goToProfile()">
+        <mat-icon>person</mat-icon>
+        Afficher le profil
+      </button>
+
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Déconnexion
+      </button>
+    </ng-container>
+
+    <ng-template #loginMenu>
+      <button mat-menu-item class="google-signin-btn" *ngIf="!isLoggedIn()" (click)="loginWithGoogle()">
+        <span class="google-signin-content">
+          <img src="assets/logo-google.png" class="google-icon" alt="Google Logo">
+          <span>Se connecter avec Google</span>
+        </span>
+      </button>
+    </ng-template>
+  </mat-menu>
 </mat-toolbar>
 
 <mat-menu #cartMenu="matMenu" class="cart-menu" xPosition="before">
