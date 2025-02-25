@@ -39,8 +39,9 @@ export class ProfileComponent implements OnInit {
   }
 
   editProfile() {
-    //Todo in other branche
+    this.router.navigate(['/edit-profile']);
   }
+
 
   logout() {
     this.authService.logout();
