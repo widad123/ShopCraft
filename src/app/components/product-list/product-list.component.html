@@ -1,11 +1,15 @@
-<div class="container mx-auto px-4">
-  <h1 class="text-5xl font-extrabold text-center my-10 text-gray-900 drop-shadow-lg">
+<div class="container mx-auto px-4"
+     [ngClass]="this.isDarkMode() ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'">
+
+  <h1 class="text-5xl font-extrabold text-center my-10 drop-shadow-lg"
+      [ngClass]="this.isDarkMode() ? 'text-white' : 'text-gray-900'">
     🛍️ Nos Produits
   </h1>
 
   <div class="flex justify-center gap-4 mb-10">
     <select [(ngModel)]="selectedCategory" (change)="filterProducts()"
-            class="p-3 border border-gray-300 rounded-lg shadow-md bg-white hover:border-indigo-500 transition">
+            class="p-3 border rounded-lg shadow-md transition"
+            [ngClass]="this.isDarkMode() ? 'border-gray-700 bg-gray-800 text-white' : 'border-gray-300 bg-white text-black'">
       <option value="">Toutes les catégories</option>
       <option *ngFor="let category of categories" [value]="category">
         {{ category }}
@@ -13,7 +17,8 @@
     </select>
 
     <select [(ngModel)]="selectedSort" (change)="sortProducts()"
-            class="p-3 border border-gray-300 rounded-lg shadow-md bg-white hover:border-indigo-500 transition">
+            class="p-3 border rounded-lg shadow-md transition"
+            [ngClass]="this.isDarkMode() ? 'border-gray-700 bg-gray-800 text-white' : 'border-gray-300 bg-white text-black'">
       <option value="">Trier par</option>
       <option value="price">Prix</option>
       <option value="name">Nom</option>
@@ -22,33 +27,39 @@
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
     <div *ngFor="let product of filteredProducts"
-         class="bg-white shadow-2xl rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-3xl border border-gray-200">
+         class="shadow-2xl rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-3xl border"
+         [ngClass]="this.isDarkMode() ? 'bg-gray-800 border-gray-700 text-white' : 'bg-white border-gray-200 text-black'">
 
       <img [src]="product.image" alt="{{ product.title }}"
-           class="w-full h-64 object-contain bg-white rounded-t-xl transition-opacity duration-300 hover:opacity-90">
+           class="w-full h-64 object-contain rounded-t-xl transition-opacity duration-300 hover:opacity-90"
+           [ngClass]="this.isDarkMode() ? 'bg-gray-700' : 'bg-white'">
 
       <div class="p-6 flex flex-col items-center text-center">
-        <h2 class="text-2xl font-bold text-gray-800 hover:text-indigo-700 transition">
+        <h2 class="text-2xl font-bold transition"
+            [ngClass]="this.isDarkMode() ? 'text-white hover:text-indigo-400' : 'text-gray-800 hover:text-indigo-700'">
           {{ product.title }}
         </h2>
 
-        <p class="text-gray-600 my-3">
+        <p class="my-3"
+           [ngClass]="this.isDarkMode() ? 'text-gray-400' : 'text-gray-600'">
           {{ product.description }}
         </p>
 
-        <p class="text-2xl font-bold text-indigo-600">
+        <p class="text-2xl font-bold"
+           [ngClass]="this.isDarkMode() ? 'text-indigo-400' : 'text-indigo-600'">
           {{ product.price }} €
         </p>
 
         <div class="mt-4 flex justify-between w-full">
           <a [routerLink]="['/product', product.id]"
-             class="text-indigo-500 hover:underline hover:text-indigo-700 transition">
+             class="hover:underline transition"
+             [ngClass]="this.isDarkMode() ? 'text-indigo-400 hover:text-indigo-300' : 'text-indigo-500 hover:text-indigo-700'">
             Voir détails
           </a>
 
-          <button class="bg-gradient-to-r from-purple-600 to-indigo-900 text-white px-5 py-2 rounded-lg
-                         hover:from-purple-900 hover:to-indigo-700 transform hover:scale-110 shadow-lg transition"
-                  (click)="addToCart(product)">
+          <button class="px-5 py-2 rounded-lg transform hover:scale-110 shadow-lg transition"
+                  (click)="addToCart(product)"
+                  [ngClass]="this.isDarkMode() ? 'bg-indigo-700 text-white hover:bg-indigo-500' : 'bg-gradient-to-r from-purple-600 to-indigo-900 text-white hover:from-purple-900 hover:to-indigo-700'">
             ➕ AJOUTER AU PANIER
           </button>
         </div>

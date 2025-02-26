@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {ProductService } from '../../services/product.service';
-import { NgForOf } from '@angular/common';
+import {NgClass, NgForOf} from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Product } from '../../Models/Products';
 import { CartService } from '../../services/cart.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {ThemeService} from '../../services/theme.service';
 
 
 @Component({
@@ -15,7 +16,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   imports: [
     NgForOf,
     RouterLink,
-    FormsModule
+    FormsModule,
+    NgClass
   ],
   styleUrls: ['./product-list.component.css']
 })
@@ -25,8 +27,10 @@ export class ProductListComponent implements OnInit {
   selectedCategory: string = '';
   selectedSort: string = '';
   categories: string[] = [];
+  public darkMode = false;
 
-  constructor(private productService: ProductService, private cartService: CartService, private snackBar: MatSnackBar) {}
+
+  constructor(private productService: ProductService, private cartService: CartService, private snackBar: MatSnackBar, private themeService :ThemeService) {}
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe(data => {
@@ -64,5 +68,13 @@ export class ProductListComponent implements OnInit {
       horizontalPosition: 'end',
       panelClass: ['custom-snackbar']
     });
+  }
+  toggleTheme(): void {
+    this.darkMode = !this.darkMode;
+    document.body.classList.toggle('dark', this.darkMode);
+  }
+
+  public isDarkMode(): boolean {
+    return this.themeService.getIsDarkMode();
   }
 }
