@@ -61,9 +61,7 @@
 .user-avatar {
   width: 36px;
   height: 36px;
-  border-radius: 100%;
-  object-fit: cover;
-  transition: transform 0.2s ease-in-out;
+  border-radius:200%;
 }
 
 .user-avatar:hover {
@@ -120,13 +118,13 @@
   text-align: center;
 }
 .cart-menu {
-  width: 300px !important; /* Ajuste la largeur */
+  width: 300px !important;
   border-radius: 10px !important;
   background: white !important;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15) !important; /* Ombre subtile */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15) !important;
   padding: 15px !important;
-  backdrop-filter: blur(10px) !important; /* Effet de flou */
-  border: 1px solid rgba(0, 0, 0, 0.1) !important; /* Bordure légère */
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
 }
 
 .cart-menu-content {

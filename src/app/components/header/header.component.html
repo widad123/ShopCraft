@@ -51,7 +51,6 @@
         <mat-icon>person</mat-icon>
         Afficher le profil
       </button>
-
       <button mat-menu-item (click)="logout()">
         <mat-icon>logout</mat-icon>
         Déconnexion
@@ -59,12 +58,7 @@
     </ng-container>
 
     <ng-template #loginMenu>
-      <button mat-menu-item class="google-signin-btn" *ngIf="!isLoggedIn()" (click)="loginWithGoogle()">
-        <span class="google-signin-content">
-          <img src="assets/logo-google.png" class="google-icon" alt="Google Logo">
-          <span>Se connecter avec Google</span>
-        </span>
-      </button>
+        <app-login></app-login>
     </ng-template>
   </mat-menu>
 </mat-toolbar>

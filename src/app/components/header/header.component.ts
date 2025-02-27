@@ -11,6 +11,7 @@ import {SearchComponent} from '../search/search.component';
 import {AuthService} from '../../services/auth.service';
 import {ThemeService} from '../../services/theme.service';
 import {MatLabel} from '@angular/material/form-field';
+import {LoginComponent} from '../login/login.component';
 
 
 @Component({
@@ -29,6 +30,7 @@ import {MatLabel} from '@angular/material/form-field';
     SearchComponent,
     MatAnchor,
     MatButton,
+    LoginComponent
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
@@ -102,11 +104,6 @@ export class HeaderComponent implements OnInit{
 
   isLoggedIn(): boolean {
     return this.authService.getUser() !== null;
-  }
-
-  loginWithGoogle() {
-    this.authService.loginWithGoogle();
-    this.router.navigate(['/home']);
   }
 
 }
