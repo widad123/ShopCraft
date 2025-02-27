@@ -1,5 +1,5 @@
 <mat-toolbar class="header" xmlns="http://www.w3.org/1999/html">
-  <a routerLink="/" class="logo-link">My E-Commerce</a>
+  <a routerLink="/" class="logo-link">ShopCraft</a>
 
   <span class="spacer"></span>
 
@@ -38,12 +38,11 @@
     </button>
   </div>
 
-  <mat-menu #userMenu="matMenu" class="user-menu">
+  <mat-menu #userMenu="matMenu" class="backdrop-blur-md  rounded-lg border-white   ">
     <div class="user-info" *ngIf="isLoggedIn()">
       <img [src]="userProfilePicture" class="user-avatar" alt="Photo de profil">
       <div class="user-details">
         <span class="user-name">Bonjour, {{ userName }}</span>
-        <span class="user-email">{{ userEmail }}</span>
       </div>
     </div>
 
@@ -74,7 +73,7 @@
   <div class="cart-menu-content">
     <app-cart></app-cart>
   </div>
-  <button mat-raised-button color="accent" class="cart-button" (click)="goToCart()">
-    J'accède à mon panier
+  <button mat-raised-button class="cart-button" (click)="goToCart()">
+    <p> J'accède à mon panier </p>
   </button>
 </mat-menu>

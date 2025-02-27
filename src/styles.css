@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html, body {
-  background: linear-gradient(180deg, #c0bad8, #e5e7eb);
+  background: rgb(255, 255, 255);
   color: #333;
   font-family: 'Poppins', sans-serif;
   margin: 0;
@@ -19,13 +19,13 @@ html, body {
 }
 
 h1, h2, h3 {
-  color: #1A237E;
+  color: #000000;
 }
 
 p {
   line-height: 1.6;
   font-size: 16px;
-  color: #5A5A5A;
+  color: #c8b4b1;
 }
 
 
@@ -43,7 +43,6 @@ app-root {
   flex-direction: column;
   min-height: 100vh;
 }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .footer {
   margin-top: auto;
 }
@@ -52,7 +51,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .custom-snackbar {
-  background: linear-gradient(to right, #9333ea, #312e81) !important;
+  background: linear-gradient(to right, #f3f3f3, #312e81) !important;
   color: white !important;
   font-size: 16px;
   font-weight: bold;
@@ -66,7 +65,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   justify-content: center;
   align-items: center;
   height: 80vh;
-  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  background: linear-gradient(135deg, #ffffff, #d9cec2);
   padding: 20px;
 }
 
@@ -95,7 +94,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .user-name {
-  font-size: 20px;
+  font-size: 15px;
   font-weight: bold;
 }
 
@@ -110,7 +109,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .profile-body h3 {
-  color: #4A90E2;
+  color: #d9cec2;
   font-size: 18px;
   margin-bottom: 10px;
 }
@@ -153,7 +152,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 mat-form-field {
-  width: 100%;
+  width: 200%;
 }
 
 
@@ -188,7 +187,7 @@ button[disabled] {
 }
 
 body {
-  background-color: #ffffff;
+  background: rgb(255, 255, 255);
   color: #000000;
 }
 
@@ -204,4 +203,19 @@ body {
 .dark-theme .nav-links a {
   color: #ddd !important;
 }
+.dark-theme .logo-link {
+  color: #ddd !important;
+
+}
+
+.dark-theme .search-bar .mat-icon-search{
+  color: #ddd !important;
+
+}
+.dark-theme .search-bar .placeholder-text{
+  color: #ddd !important;
+
+}
+
+
 

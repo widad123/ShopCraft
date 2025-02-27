@@ -10,6 +10,7 @@ import {NgIf} from '@angular/common';
 import {SearchComponent} from '../search/search.component';
 import {AuthService} from '../../services/auth.service';
 import {ThemeService} from '../../services/theme.service';
+import {MatLabel} from '@angular/material/form-field';
 
 
 @Component({
@@ -21,13 +22,13 @@ import {ThemeService} from '../../services/theme.service';
     CartComponent,
     MatMenuTrigger,
     MatIconButton,
-    MatButton,
     RouterLink,
-    MatAnchor,
     RouterLinkActive,
     NgIf,
     MatMenuItem,
-    SearchComponent
+    SearchComponent,
+    MatAnchor,
+    MatButton,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'

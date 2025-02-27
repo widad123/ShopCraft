@@ -25,7 +25,6 @@
   width: 100%;
 }
 
-/* ✅ Image produit */
 .cart-item-img {
   width: 80px;
   height: 80px;
@@ -33,7 +32,6 @@
   border-radius: 8px;
 }
 
-/* ✅ Nom et prix */
 .item-details {
   flex-grow: 1;
   text-align: left;
@@ -110,4 +108,10 @@
 
 .checkout-button:hover {
   background-color: #a39ebf;
+}
+
+
+.cart-title-total{
+  font-family: 'Poppins', sans-serif;
+  color: black;
 }
