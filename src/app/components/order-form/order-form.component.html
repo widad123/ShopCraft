@@ -176,7 +176,7 @@
           <button mat-button matStepperPrevious class="step-button back-button">Retour</button>
           <button class="pay-button" [disabled]="paymentForm.invalid" (click)="submitOrder()">
             <span class="material-icons" *ngIf="isCreditPayment">lock</span>
-            {{ isCreditPayment ? 'Payer ' : 'Valider ma commande ' }} : {{ totalPrice | number:'1.2-2' }} €
+            {{ isCreditPayment ? 'Payer ' : 'Valider commande ' }} : {{ totalPrice | number:'1.2-2' }} €
           </button>
         </div>
 

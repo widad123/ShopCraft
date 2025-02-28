@@ -13,7 +13,6 @@ export class LoginComponent {
   constructor(private authService : AuthService) {
     const user = this.authService.getUser();
     if (user) {
-      console.log("🔄 Utilisateur déjà connecté :", user);
       window.location.href = "/home";
     }
   }
